@@ -9,14 +9,14 @@ dotenv.config()
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
-  solidity: "0.7.3",
+  solidity: "0.8.0",
   networks:{
     hardhat:{
       chainId:1337
     },
-    ropsten: {
-      url: String(process.env.API_KEY),
-      accounts: [String(process.env.PRIVATE_KEY)]
-    }
+    // ropsten: {
+    //   url: String(process.env.API_KEY),
+    //   accounts: [String(process.env.PRIVATE_KEY)]
+    // }
   }
 };
