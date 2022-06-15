@@ -5,12 +5,12 @@ import { PoseidonT3 } from "./Poseidon.sol"; //an existing library to perform Po
 import "./Verifier.sol"; //inherits with the MerkleTreeInclusionProof verifier contract
 
 contract MerkleTree is Verifier{
-    uint256[] public hashes; // the Merkle tree in flattened array form
-    uint256 public depth;//represents the depth of the Merkle tree
+    uint256[] private hashes; // the Merkle tree in flattened array form
+    uint256 private depth;//represents the depth of the Merkle tree
     mapping(uint256 => uint256) public roots;//to store previous roots
     uint32 public constant ROOT_HISTORY_SIZE = 30;
-    uint256 public index = 0; // the current index of the first unfilled leaf
-    uint256 public root; // the current Merkle root
+    uint256 private index = 0; // the current index of the first unfilled leaf
+    uint256 private root; // the current Merkle root
 
     constructor(uint n) {
         uint256 length=2**n;
@@ -66,6 +66,17 @@ contract MerkleTree is Verifier{
        return index;
     }
 
+    function getIndex() public view returns(uint256){
+        return index;
+    }
+
+    function getHashes()public view returns(uint256[] memory){
+        return hashes;
+    }
+
+    function getRoot()public view returns(uint256){
+        return root;
+    }
     function verifyLeaf(
             uint[2] memory a,
             uint[2][2] memory b,

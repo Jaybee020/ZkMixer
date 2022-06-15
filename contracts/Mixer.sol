@@ -1,6 +1,6 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
-import "./Merkle.Sol";
+import "./Merkle.sol";
 
 contract Mixer is MerkleTree{
     constructor(uint n) MerkleTree(n){ }//to initialze merkle tree
@@ -30,7 +30,7 @@ contract Mixer is MerkleTree{
             uint[2] memory c,
             uint[2] memory input
         ) public payable returns (bool) {
-        require(verifyProof(a, b, c, input) && (input[0]==root) && (nullifierHashes[input[1]]));//takes in root variable from input checks if it is equal to state variable root
+        require(verifyProof(a, b, c, input) && (!nullifierHashes[input[1]]),"Wrong proof sent or nullifier hash used");//takes in root variable from input checks if it is equal to state variable root
         nullifierHashes[input[1]]=true;
         to.transfer(depositAmount);
         emit Withdrawal(to, input[1]);//emit withdrawal
