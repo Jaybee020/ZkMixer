@@ -1,22 +1,26 @@
-import "@nomiclabs/hardhat-waffle"
-import "@nomiclabs/hardhat-ethers"
-import "hardhat-gas-reporter"
-import * as dotenv from "dotenv"
+import "@nomiclabs/hardhat-waffle";
+import "@nomiclabs/hardhat-ethers";
+import "hardhat-gas-reporter";
+import * as dotenv from "dotenv";
 
-dotenv.config()
+dotenv.config();
+
+const PRIVATE_KEY = String(process.env.PRIVATE_KEY);
 
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
   solidity: "0.8.0",
-  networks:{
-    hardhat:{
-      chainId:1337
+  networks: {
+    hardhat: {
+      chainId: 1337,
     },
-    // ropsten: {
-    //   url: String(process.env.API_KEY),
-    //   accounts: [String(process.env.PRIVATE_KEY)]
-    // }
-  }
+    testnet: {
+      url: `https://api.s0.ps.hmny.io`, //link for rpcUrl of devnet
+      accounts: [
+        PRIVATE_KEY, //input your private key
+      ],
+    },
+  },
 };
