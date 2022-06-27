@@ -15,11 +15,8 @@ const Deposit = () => {
     const setValue = async () => {
       const mixer = await getMixer();
       mixer.on("Deposit", (commitment, index, timestamp) => {
-        const date = new Date(timestamp);
         setMessage(
-          `Deposit Successfully performed at  ${
-            (date, toString())
-          }. New Index is ${index}`
+          `Deposit Successfully performed at  ${timestamp}. New Index is ${index}`
         );
       });
     };

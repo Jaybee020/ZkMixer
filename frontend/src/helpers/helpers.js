@@ -128,7 +128,7 @@ export async function getRelayers(n = 1) {
       return {
         addr: relayerAddr,
         count: count.toNumber(),
-        sum: sum.toNumber(),
+        sum: utils.formatEther(sum),
         locator: locator,
       };
     })
