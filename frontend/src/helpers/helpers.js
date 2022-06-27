@@ -2,7 +2,7 @@
 import { buildPoseidon } from "circomlibjs";
 import { groth16 } from "snarkjs";
 import { IncrementalMerkleTree } from "@zk-kit/incremental-merkle-tree";
-const { providers, utils } = require("ethers");
+const { Contract, providers, utils } = require("ethers");
 const { RegistryClient } = require("./client");
 
 function unstringifyBigInts(o) {
