@@ -3,6 +3,7 @@ import { buildPoseidon } from "circomlibjs";
 import { groth16 } from "snarkjs";
 import { IncrementalMerkleTree } from "@zk-kit/incremental-merkle-tree";
 const { Contract, providers, utils } = require("ethers");
+const Mixer = require("./Mixer.json");
 const { RegistryClient } = require("./client");
 
 function unstringifyBigInts(o) {
