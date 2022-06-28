@@ -19,11 +19,13 @@ function App() {
           <nav className="navBar">ZK Mixer</nav>
         </Link>
       </header>
+      <p>Zkmixer</p>
       <Routes>
         <Route
           path="/"
           element={
             <>
+              <p>lovsgs</p>
               <Deposit></Deposit>
             </>
           }
