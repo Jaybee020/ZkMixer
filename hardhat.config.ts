@@ -16,6 +16,10 @@ module.exports = {
     hardhat: {
       chainId: 1337,
     },
+    mainnet: {
+      url: "https://api.harmony.one", //url link for mainnet
+      accounts: [PRIVATE_KEY],
+    },
     testnet: {
       url: `https://api.s0.ps.hmny.io`, //link for rpcUrl of devnet
       accounts: [

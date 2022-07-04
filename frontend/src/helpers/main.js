@@ -34,7 +34,7 @@ export async function deposit(secret, nullifier) {
     throw new Error("Please install metamask");
   }
   const mixer = new Contract(
-    "0x555EB1fE392498800a8DEE646b7f2C39F8D3C5E3",
+    "0x500390299D3da7470805Af480D9dC759925F0C2C",
     Mixer.abi,
     new providers.Web3Provider(getEth()).getSigner()
   );
@@ -50,7 +50,7 @@ export async function withdrawBySelf(secret, nullifier, to) {
     throw new Error("Please install metamask");
   }
   const mixer = new Contract(
-    "0x555EB1fE392498800a8DEE646b7f2C39F8D3C5E3",
+    "0x500390299D3da7470805Af480D9dC759925F0C2C",
     Mixer.abi,
     new providers.Web3Provider(getEth()).getSigner()
   );
@@ -71,7 +71,7 @@ export async function withdrawwithRelayer(
     throw new Error("Please install metamask");
   }
   const mixer = new Contract(
-    "0x555EB1fE392498800a8DEE646b7f2C39F8D3C5E3",
+    "0x500390299D3da7470805Af480D9dC759925F0C2C",
     Mixer.abi,
     new providers.Web3Provider(getEth()).getSigner()
   );

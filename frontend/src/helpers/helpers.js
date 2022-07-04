@@ -38,9 +38,9 @@ export async function getProvider(networkUrl) {
 }
 
 export async function getMixer() {
-  const provider = await getProvider("https://api.s0.ps.hmny.io");
+  const provider = await getProvider("https://api.harmony.one");
   const mixer = new Contract(
-    "0x555EB1fE392498800a8DEE646b7f2C39F8D3C5E3",
+    "0x500390299D3da7470805Af480D9dC759925F0C2C",
     Mixer.abi,
     provider
   );
@@ -118,10 +118,11 @@ export async function encodeCallData(to, fee, a, b, c, input) {
 }
 
 export async function getRelayers(n = 1) {
-  const provider = await getProvider("https://api.s0.ps.hmny.io");
+  const provider = await getProvider("https://api.harmony.one");
   const client = new RegistryClient(provider);
   const relayersAddrs = await client.getRelayers(n);
-  const relayersData = Promise.all(
+  console.log(relayersAddrs);
+  const relayersData = await Promise.all(
     relayersAddrs.map(async (relayerAddr) => {
       const { count, sum } = await client.getRelayerFee(relayerAddr);
       const locator = await client.getRelayerLocator(relayerAddr);
@@ -137,7 +138,7 @@ export async function getRelayers(n = 1) {
 }
 
 export async function submitTx(relayerAddr, txn) {
-  const provider = await getProvider("https://api.s0.ps.hmny.io");
+  const provider = await getProvider("https://api.harmony.one");
   const client = new RegistryClient(provider);
   const relayerLocator = await client.getRelayerLocator(relayerAddr);
   const result = await client.submitTx(relayerLocator, txn);

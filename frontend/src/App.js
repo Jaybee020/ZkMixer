@@ -16,7 +16,6 @@ function App() {
     <Router>
       <header>
         <Link to="/">
-          {" "}
           <nav className="navBar">ZK Mixer</nav>
         </Link>
       </header>
