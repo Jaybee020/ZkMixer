@@ -2,9 +2,9 @@
 import { buildPoseidon } from "circomlibjs";
 import { groth16 } from "snarkjs";
 import { IncrementalMerkleTree } from "@zk-kit/incremental-merkle-tree";
+import { RegistryClient } from "relayer-client";
 const { Contract, providers, utils } = require("ethers");
 const Mixer = require("./Mixer.json");
-const { RegistryClient } = require("./client");
 
 function unstringifyBigInts(o) {
   if (typeof o == "string" && /^[0-9]+$/.test(o)) {
@@ -40,7 +40,7 @@ export async function getProvider(networkUrl) {
 export async function getMixer() {
   const provider = await getProvider("https://api.s0.ps.hmny.io");
   const mixer = new Contract(
-    "0x1F8eb6EEB139015a386d0fdb5ED5A604C643f7de",
+    "0x555EB1fE392498800a8DEE646b7f2C39F8D3C5E3",
     Mixer.abi,
     provider
   );
@@ -55,8 +55,8 @@ export async function getSolidityCallData(mixer, secret, nullifier) {
   const root = await mixer.getRoot();
   const commitment = F.toObject(poseidon([secret, nullifier]));
   let nullifierHash = F.toObject(poseidon([nullifier]));
-  const tree = new IncrementalMerkleTree(poseidon, 3, BigInt(0), 2);
-  const leafs = hashes.slice(0, 8); //tree depth is 3 so get leaf nodes
+  const tree = new IncrementalMerkleTree(poseidon, 8, BigInt(0), 2);
+  const leafs = hashes.slice(0, 256); //tree depth is 8 so get leaf nodes
   leafs.forEach((leaf) => {
     tree.insert(BigInt(leaf));
   });
@@ -136,9 +136,10 @@ export async function getRelayers(n = 1) {
   return relayersData;
 }
 
-export async function submitTx(relayerLocator, txn) {
+export async function submitTx(relayerAddr, txn) {
   const provider = await getProvider("https://api.s0.ps.hmny.io");
   const client = new RegistryClient(provider);
+  const relayerLocator = await client.getRelayerLocator(relayerAddr);
   const result = await client.submitTx(relayerLocator, txn);
   return result;
 }

@@ -1,6 +1,7 @@
 {
   "name": "frontend",
   "version": "0.1.0",
+  "homepage": "https://zk-mixer.netlify.app",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.9.3",
@@ -26,6 +27,7 @@
     "react-hook-form": "^7.33.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "relayer-client": "^1.0.6",
     "snarkjs": "^0.4.22",
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
@@ -45,9 +47,11 @@
   },
   "browserslist": {
     "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+      "chrome >= 67",
+      "edge >= 79",
+      "firefox >= 68",
+      "opera >= 54",
+      "safari >= 14"
     ],
     "development": [
       "last 1 chrome version",

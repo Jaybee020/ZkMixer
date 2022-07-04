@@ -3,7 +3,15 @@ import { Link } from "react-router-dom";
 import { FormControlLabel, Switch } from "@mui/material";
 import { useForm } from "react-hook-form";
 
-const Form = ({ type, useRelayer, toggleFn, submitFn, message }) => {
+const Form = ({
+  type,
+  useRelayer,
+  toggleFn,
+  submitFn,
+  message,
+  view,
+  relayer,
+}) => {
   const { register, handleSubmit } = useForm();
   return (
     <div className="formBox">
@@ -43,6 +51,7 @@ const Form = ({ type, useRelayer, toggleFn, submitFn, message }) => {
             <TextField
               {...register("receiverAddr")}
               style={{ marginBottom: 10 }}
+              value={relayer}
               label="Receiver Address"
               variant="outlined"
             />
@@ -62,9 +71,9 @@ const Form = ({ type, useRelayer, toggleFn, submitFn, message }) => {
         {type === "Withdraw" && useRelayer ? (
           <div style={{ marginTop: 20 }}>
             <TextField
-              {...register("relayerLocator")}
+              {...register("relayerAddr")}
               style={{ marginLeft: 0 }}
-              label="Relayer Locator Used"
+              label="Relayer Address Used"
               variant="outlined"
             />
             <TextField
@@ -74,16 +83,28 @@ const Form = ({ type, useRelayer, toggleFn, submitFn, message }) => {
               variant="outlined"
             />
             <div className="relayLink">
-              <Link to="/relayers">Get Relayers</Link>
+              <Link style={{ color: "black" }} to="/relayers">
+                Get Relayers
+              </Link>
             </div>
           </div>
         ) : (
           ""
         )}
         <div className="btn">
-          <Button type="submit" variant="contained">
-            {type}
-          </Button>
+          {type === "Deposit" ? (
+            view ? (
+              ""
+            ) : (
+              <Button type="submit" variant="contained">
+                {type}
+              </Button>
+            )
+          ) : (
+            <Button type="submit" variant="contained">
+              {type}
+            </Button>
+          )}
         </div>
         <small>{message}</small>
       </form>

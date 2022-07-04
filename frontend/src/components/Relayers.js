@@ -31,9 +31,6 @@ export default function BasicTable() {
           <TableRow>
             <TableCell style={{ color: "white" }}>Address</TableCell>
             <TableCell style={{ color: "white" }} align="right">
-              Locator
-            </TableCell>
-            <TableCell style={{ color: "white" }} align="right">
               Fee Sum
             </TableCell>
             <TableCell style={{ color: "white" }} align="right">
@@ -49,9 +46,6 @@ export default function BasicTable() {
             >
               <TableCell style={{ color: "white" }} component="th" scope="row">
                 {row.addr}
-              </TableCell>
-              <TableCell style={{ color: "white" }} align="right">
-                {row.locator}
               </TableCell>
               <TableCell style={{ color: "white" }} align="right">
                 {row.sum}

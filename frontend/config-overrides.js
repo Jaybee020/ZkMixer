@@ -12,6 +12,8 @@ module.exports = function override(config, env) {
     fs: false,
     constants: false,
     path: false,
+    net: false,
+    child_process: false,
   };
 
   config.plugins.push(

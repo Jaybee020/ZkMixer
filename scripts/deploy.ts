@@ -19,7 +19,7 @@ async function deployMixer() {
       PoseidonT3: poseidonT3.address,
     },
   });
-  const mixer = await Mixer.deploy(3);
+  const mixer = await Mixer.deploy(8);
   await mixer.deployed();
   return mixer;
 }

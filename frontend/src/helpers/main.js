@@ -34,7 +34,7 @@ export async function deposit(secret, nullifier) {
     throw new Error("Please install metamask");
   }
   const mixer = new Contract(
-    "0x1F8eb6EEB139015a386d0fdb5ED5A604C643f7de",
+    "0x555EB1fE392498800a8DEE646b7f2C39F8D3C5E3",
     Mixer.abi,
     new providers.Web3Provider(getEth()).getSigner()
   );
@@ -44,25 +44,44 @@ export async function deposit(secret, nullifier) {
   await mixer.deposit(commitment, { value: utils.parseEther("10") });
 }
 
-export async function withdraw(secret, nullifier, to, fee, relayerLocator) {
+export async function withdrawBySelf(secret, nullifier, to) {
   if (!(await hasAccounts()) && !(await requestAccounts())) {
     //asking metamask for accounts in it and requesting the account
     throw new Error("Please install metamask");
   }
   const mixer = new Contract(
-    "0x1F8eb6EEB139015a386d0fdb5ED5A604C643f7de",
+    "0x555EB1fE392498800a8DEE646b7f2C39F8D3C5E3",
     Mixer.abi,
     new providers.Web3Provider(getEth()).getSigner()
   );
   const [a, b, c, input] = await getSolidityCallData(mixer, secret, nullifier);
-  console.log(a, b, c, input);
+  const receipt = await mixer.withdraw(to, 0, a, b, c, input);
+  return "Successfully withdrew by self with hash" + receipt.msg;
+}
+
+export async function withdrawwithRelayer(
+  secret,
+  nullifier,
+  to,
+  fee,
+  relayerAddr
+) {
+  if (!(await hasAccounts()) && !(await requestAccounts())) {
+    //asking metamask for accounts in it and requesting the account
+    throw new Error("Please install metamask");
+  }
+  const mixer = new Contract(
+    "0x555EB1fE392498800a8DEE646b7f2C39F8D3C5E3",
+    Mixer.abi,
+    new providers.Web3Provider(getEth()).getSigner()
+  );
+  const [a, b, c, input] = await getSolidityCallData(mixer, secret, nullifier);
   const callData = await encodeCallData(to, fee, a, b, c, input);
   const txn = {
     to: mixer.address,
     data: callData,
     value: "0",
   };
-  const receipt = await submitTx(relayerLocator, txn);
-  console.log(receipt);
-  return "Successfully withdrew using relayer with receipt" + receipt;
+  const receipt = await submitTx(relayerAddr, txn);
+  return "Successfully withdrew using relayer with hash " + receipt.msg;
 }

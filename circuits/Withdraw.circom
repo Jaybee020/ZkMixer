@@ -26,4 +26,4 @@ template Withdraw(n){
 }
 
 
-component main{public [root,nullifierHash]} = Withdraw(3);
+component main{public [root,nullifierHash]} = Withdraw(8);//change to 3 for test
