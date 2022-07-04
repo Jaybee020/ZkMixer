@@ -27,7 +27,7 @@
     "react-hook-form": "^7.33.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
-    "relayer-client": "^1.0.6",
+    "relayer-client": "1.0.6",
     "snarkjs": "^0.4.22",
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
